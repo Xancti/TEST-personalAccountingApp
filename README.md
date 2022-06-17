@@ -47,7 +47,10 @@ You can preview the production build with `npm run preview`.
 (name), 
 D(balance) - starts at 0 and increases or decreases based on (2)
 
-NOTE: App would definitely have a huge flaw with respect to relationship drawing // security - a single bad actor could mess up the entire database; but will leave this as proof of concept for the time being, otherwise this project would probably be too time consuming.
+NOTE: App would definitely have a huge flaw with respect to relationship drawing // security - a single bad actor could mess up the entire database; but will leave this as proof of concept for the time being, otherwise this project would be too time consuming.
 
-Granted, this could be worked around by simple 2-way handshakes? etc. you cannot set up transactions for me if I haven't accepted your relational request
-This would however, require authentification of the individuals and recording said relationships.
+That said, the issue could be worked around by simple 2-way handshakes? etc. you cannot set up transactions for me if I haven't accepted your relational request
+This would however, require authentication of the individuals and recording said relationships.
+
+# handleSubmit()
+Handles the submission of a new transaction, this will create a new entry transactionStore; following that, the relevant individuals' balances should be updated in userStore. 

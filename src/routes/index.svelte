@@ -1,18 +1,20 @@
 <script>
-    import { FeedbackStore } from "../store"
+    import { TransactionStore } from "../transactionStore"
+    import { userStore } from "../userStore";
     import MainForm from "$lib/MainForm.svelte";
-
-    const test = $FeedbackStore[0].id
 
 </script>
 
 <div class="container">
     <MainForm />
-    {#each $FeedbackStore as fb}
-        {#if fb.name != 'undefined' && fb.balance != 'undefined'}
-            <p>{fb.name}</p>
-            <p>{fb.balance}</p>
-            <p>{fb.id}</p>
-        {/if}
+    {#each $userStore as individual}
+        <p>{individual.name}</p>
+        <p>{individual.balance}</p>
+        <p>{individual.relatedTransactions}</p>
     {/each}
+
+    {#each $TransactionStore as tx}
+    <p>{tx.cost}</p>
+    <p>{tx.description}</p>
+    {/each} 
 </div>
