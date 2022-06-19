@@ -1,5 +1,14 @@
+<script>
+import { userStore } from "../userStore";
+export let data
+
+</script>
+
 <div class="individual">
-    <p>Meow</p>
+    <p class='name-display'>{data.name}</p>
+    <p class='balance-display'>You are owed: ${data.balance}</p>
+    <p class='transactionsDisplay'>{data.relatedTransactions}</p>
+    <!-- The above should translate into an accordion -->
 </div>
 
 <style>
@@ -12,6 +21,20 @@
         padding: 40px 0;
         margin: 20px auto;
         position: relative;
+    }
+
+    .name-display {
+        position: absolute;
+        font-size: 1.5em;
+        top: 0.1rem;
+        left: 1.5rem;
+    }
+
+    .balance-display {
+        position: absolute;
+        font-size: 1.5em;
+        top: 0.1rem;
+        right: 1.5rem;
     }
 
 </style>

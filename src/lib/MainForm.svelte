@@ -93,8 +93,8 @@ let handleSubmit = () => {
         <p>---------------------------------------------</p>
     </form>
 
-    {#each $userStore as user}
-        <Individual {user}/>
+    {#each $userStore as user (user.id)}
+        <Individual data={user}/>
     {/each}
 </Card>
 
