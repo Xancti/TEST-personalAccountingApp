@@ -1,5 +1,5 @@
 <script>
-    import { TransactionStore } from "../transactionStore"
+    import { transactionStore } from "../transactionStore"
     import { userStore } from "../userStore";
     import MainForm from "$lib/MainForm.svelte";
 
@@ -13,7 +13,7 @@
         <p>{individual.relatedTransactions}</p>
     {/each}
 
-    {#each $TransactionStore as tx}
+    {#each $transactionStore as tx}
     <p>{tx.cost}</p>
     <p>{tx.description}</p>
     {/each} 

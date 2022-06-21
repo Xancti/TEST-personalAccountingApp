@@ -21,7 +21,7 @@ export const userStore = writable([{
     relatedTransactions: [1]
 },
 {
-    uniqueID: 0,
+    uniqueID: 4,
     name: "Daniel",
     balance: -30,
     relatedTransactions: [1, 2]

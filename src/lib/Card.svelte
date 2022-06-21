@@ -7,7 +7,7 @@
     .card {
         background-color: #073541;
         width: 60%;
-        height: 90vh;
+        height: auto;
         color: #D6E4F5;
         border-radius: 15px;
         padding: 40px 50px;

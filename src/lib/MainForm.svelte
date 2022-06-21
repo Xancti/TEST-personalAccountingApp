@@ -1,7 +1,7 @@
 <script>
 import Card from "./Card.svelte";
 import Individual from "./Individual.svelte";
-import { TransactionStore } from "../transactionStore";
+import { transactionStore } from "../transactionStore";
 import { userStore } from "../userStore"
 
 let description = "Petrol"
@@ -27,7 +27,7 @@ let handleSubmit = () => {
     }
 
     // Update the TransactionStore
-    TransactionStore.update((currentStore) => {
+    transactionStore.update((currentStore) => {
         return [...currentStore, newTransaction]
     })
 
@@ -93,7 +93,7 @@ let handleSubmit = () => {
         <p>---------------------------------------------</p>
     </form>
 
-    {#each $userStore as user (user.id)}
+    {#each $userStore as user}
         <Individual data={user}/>
     {/each}
 </Card>

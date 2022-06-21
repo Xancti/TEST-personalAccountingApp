@@ -1,13 +1,19 @@
 <script>
-import { userStore } from "../userStore";
-export let data
+    import Transactions from "$lib/Transactions.svelte"
+    export let data
 
 </script>
 
 <div class="individual">
     <p class='name-display'>{data.name}</p>
-    <p class='balance-display'>You are owed: ${data.balance}</p>
-    <p class='transactionsDisplay'>{data.relatedTransactions}</p>
+    <p class='balance-display'>
+        {data.balance > 0 ? 
+        `You are owed: $${data.balance}` :
+         `You owe: -$${-data.balance}`}</p>
+    {#each data.relatedTransactions as tx}
+            <Transactions transactionData={tx} name={data.name}/>
+            <!-- {$transactionStore.find(txObj => txObj.transactionID === tx).cost} -->
+    {/each}
     <!-- The above should translate into an accordion -->
 </div>
 
