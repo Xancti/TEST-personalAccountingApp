@@ -1,4 +1,4 @@
-import { writable} from "svelte/store";
+import { writable } from "svelte/store";
 
 // This store keeps transactions
 
@@ -9,10 +9,12 @@ export const transactionStore = writable([{
     splitType: "60-30-10",
     whoPaid: "Esther",
     partiesInvolved: "Sebastian, Daniel, Esther",
-    costBreakdown: {Sebastian: -60,
+    costBreakdown: {
+        Sebastian: -60,
         Daniel: -30,
-        Esther: -10
-    }
+        Esther: 90
+    },
+    debtBreakdownAsString: `Sebastian (60) Daniel (30)`
 },
 {
     transactionID: 2,
@@ -21,9 +23,11 @@ export const transactionStore = writable([{
     splitType: "Equal",
     whoPaid: "Daniel",
     partiesInvolved: "Daniel, Miguel",
-    costBreakdown: {Daniel: -20,
+    costBreakdown: {
+        Daniel: 20,
         Miguel: -20
-    }
+    },
+    debtBreakdownAsString: "Miguel (20)"
 },
 {
     transactionID: 3,
@@ -33,8 +37,9 @@ export const transactionStore = writable([{
     whoPaid: "Esther",
     partiesInvolved: "Esther, Miguel",
     costBreakdown:  {
-        Esther: 36,
+        Esther: 24,
         Miguel: -24
-    }
+    },
+    debtBreakdownAsString: "Miguel (24)"
 }
 ])

@@ -5,14 +5,14 @@ import { writable} from "svelte/store";
 export const userStore = writable([{
     uniqueID: 0,
     name: "Esther",
-    balance: 64,
+    balance: 114,
     relatedTransactions: [1, 3]
 },
 {
     uniqueID: 1,
     name: "Miguel",
     balance: -44,
-    relatedTransactions: [1, 2]
+    relatedTransactions: [2, 3]
 },
 {
     uniqueID: 2,
@@ -23,7 +23,7 @@ export const userStore = writable([{
 {
     uniqueID: 4,
     name: "Daniel",
-    balance: -30,
+    balance: -10,
     relatedTransactions: [1, 2]
 },
 ])

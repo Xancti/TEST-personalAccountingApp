@@ -1,35 +1,51 @@
 <script>
+import {v4 as uuidv4} from 'uuid'
 import Card from "./Card.svelte";
 import Individual from "./Individual.svelte";
 import { transactionStore } from "../transactionStore";
 import { userStore } from "../userStore"
 
-let description = "Petrol"
-let cost = 300
-let partiesInvolved = "Esther, Daniel, Miguel"
-let paymentSplit = "30-40-30"
-let payor = 'Esther'
+let description
+let partiesInvolved = ''
+let paymentSplit = ''
+let payor
+let cost
 
 $: relevantParties = partiesInvolved.split(", ")
 $: relevantSplit = paymentSplit.split("-")
 
+let costBreakdown = {}
+let debtBreakdown = ''
+
 let handleSubmit = () => {
     // Backend Stuff
+    relevantParties.forEach((element, index) => {
+        if (element === payor) {
+            costBreakdown[element] = cost - (relevantSplit[index] * 0.01 * cost)
+        } else {
+            costBreakdown[element] = relevantSplit[index] * 0.01 * -cost
+            debtBreakdown += `${element} (${relevantSplit[index] * 0.01 * cost}) `
+        }
+    })
 
     // Create the transaction
     const newTransaction = {
-        transactionID: 4,
+        transactionID: uuidv4(),
         description: description,
         cost: cost,
         splitType: paymentSplit,
         whoPaid: payor,
-        partiesInvolved: partiesInvolved
+        partiesInvolved: partiesInvolved,
+        costBreakdown: costBreakdown,
+        debtBreakdownAsString: debtBreakdown
     }
 
     // Update the TransactionStore
     transactionStore.update((currentStore) => {
         return [...currentStore, newTransaction]
     })
+
+    costBreakdown = {} // Very important to reset fields
 
     // Update relevant balances
     let index = 1 // assume 0 is always the payor's proportion
@@ -99,4 +115,9 @@ let handleSubmit = () => {
 </Card>
 
 <style>
+    h2 {
+        color: #67C59D
+    }
+
+
 </style>
