@@ -10,11 +10,12 @@ export const transactionStore = writable([{
     whoPaid: "Esther",
     partiesInvolved: "Sebastian, Daniel, Esther",
     costBreakdown: {
-        Sebastian: -60,
-        Daniel: -30,
-        Esther: 90
+        Sebastian: [-60, 'Unpaid'],
+        Daniel: [-30, 'Unpaid'],
+        Esther: [90, 'Paid']
     },
-    debtBreakdownAsString: `Sebastian (60) Daniel (30)`
+    debtBreakdownAsString: `Sebastian (60) Daniel (30)`,
+    relatedTransaction: ''
 },
 {
     transactionID: 2,
@@ -24,10 +25,11 @@ export const transactionStore = writable([{
     whoPaid: "Daniel",
     partiesInvolved: "Daniel, Miguel",
     costBreakdown: {
-        Daniel: 20,
-        Miguel: -20
+        Daniel: [20, 'Paid'],
+        Miguel: [-20, 'Unpaid']
     },
-    debtBreakdownAsString: "Miguel (20)"
+    debtBreakdownAsString: "Miguel (20)",
+    relatedTransaction: ''
 },
 {
     transactionID: 3,
@@ -37,9 +39,10 @@ export const transactionStore = writable([{
     whoPaid: "Esther",
     partiesInvolved: "Esther, Miguel",
     costBreakdown:  {
-        Esther: 24,
-        Miguel: -24
+        Esther: [24, 'Paid'],
+        Miguel: [-24, 'Unpaid']
     },
-    debtBreakdownAsString: "Miguel (24)"
+    debtBreakdownAsString: "Miguel (24)",
+    relatedTransaction: ''
 }
 ])

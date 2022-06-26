@@ -13,7 +13,7 @@
     </div>
     <p class='name-display'>{data.name}</p>
     <p class='balance-display'>
-        {data.balance > 0 ? 
+        {data.balance > -1 ? 
         `You are owed: $${data.balance}` :
          `You owe: -$${-data.balance}`}</p>
     {#each data.relatedTransactions as tx}
@@ -25,14 +25,16 @@
 
 <style>
     .individual {
+        position: relative;
+        display: block;
         background-color: #002D36;
         width: 100%;
+        min-height: 4rem;
         height: auto;
         color: #D6E4F5;
         border-radius: 15px;
         padding: 5em 0 1em 3em;
         margin: 1em 0 0 -1.5em;
-        position: relative;
     }
 
     .name-display {
@@ -53,7 +55,7 @@
     
     .header {
         display: grid;
-        grid-template-columns: 2.5fr 3fr 3fr 1fr;
+        grid-template-columns: 2.5fr 3fr 3fr 1fr 1fr;
         padding: 0 -1em 0 2em;
         margin: -15px 0 -10px -2em;
     }

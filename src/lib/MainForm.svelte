@@ -21,10 +21,10 @@ let handleSubmit = () => {
     // Backend Stuff
     relevantParties.forEach((element, index) => {
         if (element === payor) {
-            costBreakdown[element] = cost - (relevantSplit[index] * 0.01 * cost)
+            costBreakdown[element] = [(cost - relevantSplit[index] * 0.01 * cost), 'Paid']
         } else {
-            costBreakdown[element] = relevantSplit[index] * 0.01 * -cost
-            debtBreakdown += `${element} (${relevantSplit[index] * 0.01 * cost}) `
+            costBreakdown[element] = [(relevantSplit[index] * 0.01 * -cost), 'Unpaid']
+            debtBreakdown += `${element} (${relevantSplit[index] * 0.01 * cost})`
         }
     })
 
@@ -37,7 +37,8 @@ let handleSubmit = () => {
         whoPaid: payor,
         partiesInvolved: partiesInvolved,
         costBreakdown: costBreakdown,
-        debtBreakdownAsString: debtBreakdown
+        debtBreakdownAsString: debtBreakdown,
+        relatedTransaction: ''
     }
 
     // Update the TransactionStore
