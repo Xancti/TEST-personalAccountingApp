@@ -1,7 +1,6 @@
 <script>
 import {v4 as uuidv4} from 'uuid'
-import Card from "./Card.svelte";
-import Individual from "./Individual.svelte";
+import MiniCard from './Mini-Card.svelte';
 import { transactionStore } from "../transactionStore";
 import { userStore } from "../userStore"
 
@@ -88,7 +87,7 @@ let handleSubmit = () => {
 
 </script>
 
-<Card>
+<MiniCard>
     <header>
         <h2>Record your transaction</h2>
     </header>
@@ -116,11 +115,7 @@ let handleSubmit = () => {
             <span>Transaction Split</span>
         </div>
     </form>
-
-    {#each $userStore as user}
-        <Individual data={user}/>
-    {/each}
-</Card>
+</MiniCard>
 
 <style>
     h2 {

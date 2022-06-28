@@ -9,7 +9,6 @@
     const handleRepayment = (txID, person) => {
         // Original Transaction Object
         let originalTransaction = $transactionStore.find(txObj => txObj.transactionID === txID)
-        console.log('Stage1')
         
         // Transaction Details
         let description = `Repayment: ${originalTransaction.description}`
@@ -19,7 +18,6 @@
         let partiesInvolved = `${person}, ${originalTransaction.whoPaid}`
         let costBreakdown = {[person]: [cost, 'Paid'], [originalTransaction.whoPaid]: [-cost, 'Paid']}
         let debtBreakdown = `Repayment by ${person} to ${originalTransaction.whoPaid}`
-        console.log('Stage2')
 
         // Create new transaction; update transactionStore (Utilize name prop)
         const newTransaction = {
@@ -33,15 +31,12 @@
             debtBreakdownAsString: debtBreakdown,
             relatedTransaction: txID
     }
-        console.log('Stage3')
     
     // TBH, all this could be refactored
     transactionStore.update((currentTransactions) => {
         originalTransaction.costBreakdown[person][1] = 'Paid'
         return [...currentTransactions, newTransaction]
     })
-    console.log('Stage4')
-    
     
     // Update relevant balances and relatedTransactions in userStore
         userStore.update((currentUsers) => {
@@ -80,6 +75,15 @@
         })
     }
 
+    const checkStatus = (txID) => {
+        let transaction = $transactionStore.find(txObj => txObj.transactionID === txID).costBreakdown
+        let status = []
+
+        for (const person in transaction) { status.push(transaction[person][1]) }
+
+        return (status.includes('Unpaid') ? 'Unsettled' : 'Settled')
+    }
+
 </script>
 
 <div class="transaction">
@@ -89,7 +93,11 @@
         <p class="debts">{$transactionStore.find(txObj => txObj.transactionID === transactionData).debtBreakdownAsString}</p>
         <p class="cost">{$transactionStore.find(txObj => txObj.transactionID === transactionData).costBreakdown[personName][0]}</p>
         <button class="delete" on:click={() => handleDelete(transactionData, personName)}></button>
-        {#if ($transactionStore.find(txObj => txObj.transactionID === transactionData).whoPaid != personName) && ($transactionStore.find(txObj => txObj.transactionID === transactionData).costBreakdown[personName][1] === 'Unpaid')}
+        {#if ($transactionStore.find(txObj => txObj.transactionID === transactionData).whoPaid === personName) &&
+         (checkStatus(transactionData) === 'Settled') &&
+         ($transactionStore.find(txObj => txObj.transactionID === transactionData).relatedTransaction === '')}
+        <button class="settled" on:click={() => handleRepayment(transactionData, personName)}></button>
+        {:else if ($transactionStore.find(txObj => txObj.transactionID === transactionData).whoPaid != personName) && ($transactionStore.find(txObj => txObj.transactionID === transactionData).costBreakdown[personName][1] === 'Unpaid')}
         <button class="pay" on:click={() => handleRepayment(transactionData, personName)}></button>
         {:else if ($transactionStore.find(txObj => txObj.transactionID === transactionData).whoPaid != personName) && ($transactionStore.find(txObj => txObj.transactionID === transactionData).costBreakdown[personName][1] === 'Paid')}
         <button class="paid" on:click={() => handleRepayment(transactionData, personName)}></button>
@@ -127,12 +135,12 @@
   
     .pay {
         position: relative;
-        top: 0.8rem;
+        top: 0.9rem;
         background-image: url($lib/icons/dollar-sign.svg);
         background-repeat: no-repeat;
         background-color: transparent;
         border: none;
-        background-size: 60%;
+        background-size: 24px;
         opacity: 0.396;
     }
 
@@ -142,26 +150,37 @@
     opacity: 1;
   }
 
-  .paid {
+  .settled {
         position: relative;
-        top: 0.8rem;
-        background-image: url($lib/icons/check-square.svg);
+        top: 0.9rem;
+        background-image: url($lib/icons/thumbs-up.svg);
         background-repeat: no-repeat;
         background-color: transparent;
         border: none;
-        background-size: 60%;
+        background-size: 24px;
+        opacity: 1;
+    }
+
+  .paid {
+        position: relative;
+        top: 0.9rem;
+        background-image: url($lib/icons/smile.svg);
+        background-repeat: no-repeat;
+        background-color: transparent;
+        border: none;
+        background-size: 24px;
         opacity: 1;
     }
 
     .delete {
         position: relative;
-        top: 0.8rem;
+        top: 0.9rem;
         left: 0.5rem;
         background-image: url($lib/icons/trash-2.svg);
         background-repeat: no-repeat;
         background-color: transparent;
         border: none;
-        background-size: 55%;
+        background-size: 24px;
         opacity: 0.396;
     }
 
