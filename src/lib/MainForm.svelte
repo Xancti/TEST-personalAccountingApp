@@ -17,6 +17,8 @@ $: relevantSplit = paymentSplit.split("-")
 let costBreakdown = {}
 let debtBreakdown = ''
 
+costBreakdown //
+
 let handleSubmit = () => {
     // Backend Stuff
     relevantParties.forEach((element, index) => {
@@ -89,33 +91,35 @@ let handleSubmit = () => {
 </script>
 
 <Card>
-    <header>
-        <h2>Record your transaction</h2>
-    </header>
-
-    <form class='form' on:submit|preventDefault={handleSubmit}>
-        <div class="input-group">
-            <input type="text" bind:value = {description} required="required">
-            <span>Description</span>
-        </div>
-        <div class="input-group">
-            <input type="number" bind:value = {cost} required="required"> <!--- How do I get rid of down/up arrows in input? --->
-            <span>Cost</span>
-        </div>
-        <div class="input-group">
-            <input type="text" bind:value = {partiesInvolved} required="required">
-            <span>People Involved</span>
-        </div>
-        <div class="input-group">
-            <input type="text" bind:value = {payor} required="required">
-            <span>Who Paid</span>
-        </div>
-        <div class="input-group">
-            <input type="text" bind:value = {paymentSplit} required="required">
-            <button class='send' type="submit"></button> <!-- I want to put this in the same field -->
-            <span>Transaction Split</span>
-        </div>
-    </form>
+    <div class='form-div'>
+        <header>
+            <h2>Record your transaction</h2>
+        </header>
+    
+        <form class='form' on:submit|preventDefault={handleSubmit}>
+            <div class="input-group">
+                <input type="text" bind:value = {description} required="required">
+                <span>Description</span>
+            </div>
+            <div class="input-group">
+                <input type="number" bind:value = {cost} required="required"> <!--- How do I get rid of down/up arrows in input? --->
+                <span>Cost</span>
+            </div>
+            <div class="input-group">
+                <input type="text" bind:value = {partiesInvolved} required="required">
+                <span>People Involved</span>
+            </div>
+            <div class="input-group">
+                <input type="text" bind:value = {payor} required="required">
+                <span>Who Paid</span>
+            </div>
+            <div class="input-group">
+                <input type="text" bind:value = {paymentSplit} required="required">
+                <button class='send' type="submit"></button> <!-- I want to put this in the same field -->
+                <span>Transaction Split</span>
+            </div>
+        </form>
+    </div>
 
     {#each $userStore as user}
         <Individual data={user}/>
@@ -123,7 +127,7 @@ let handleSubmit = () => {
 </Card>
 
 <style>
-    h2 {
+       h2 {
         color: #67C59D
     }
 
@@ -204,8 +208,16 @@ let handleSubmit = () => {
     opacity: 1;
   }
 
+  input[type=number]::-webkit-inner-spin-button, 
+  input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none; 
+  }
 
-
-
-     
+        @media only screen and (min-width: 1100px) {
+  .form-div {
+    display: none;
+  }
+        }
 </style>

@@ -109,7 +109,7 @@
     .transaction {
         position: relative;
         display: grid;
-        grid-template-columns: 2.5fr 3fr 3fr 1fr 0.5fr 0.5fr;
+        grid-template-columns: 2.5fr 2fr 3fr 1fr 0.5fr 0.5fr;
         padding: 0 -1em 0 2em;
         margin: 0px 0 0px -2em;
     }
@@ -135,7 +135,7 @@
   
     .pay {
         position: relative;
-        top: 0.9rem;
+        top: 0.9em;
         background-image: url($lib/icons/dollar-sign.svg);
         background-repeat: no-repeat;
         background-color: transparent;
@@ -152,7 +152,7 @@
 
   .settled {
         position: relative;
-        top: 0.9rem;
+        top: 0.9em;
         background-image: url($lib/icons/thumbs-up.svg);
         background-repeat: no-repeat;
         background-color: transparent;
@@ -163,7 +163,7 @@
 
   .paid {
         position: relative;
-        top: 0.9rem;
+        top: 0.9em;
         background-image: url($lib/icons/smile.svg);
         background-repeat: no-repeat;
         background-color: transparent;
@@ -174,7 +174,7 @@
 
     .delete {
         position: relative;
-        top: 0.9rem;
+        top: 0.9em;
         left: 0.5rem;
         background-image: url($lib/icons/trash-2.svg);
         background-repeat: no-repeat;

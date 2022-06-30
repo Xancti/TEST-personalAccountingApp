@@ -55,7 +55,7 @@
     
     .header {
         display: grid;
-        grid-template-columns: 2.5fr 3fr 3fr 1fr 1fr;
+        grid-template-columns: 2.5fr 2fr 3fr 1fr 1fr;
         padding: 0 -1em 0 2em;
         margin: -15px 0 -10px -2em;
     }
@@ -64,5 +64,6 @@
         text-align: right;
         padding-right: 1em;
     }
+
     
 </style>
